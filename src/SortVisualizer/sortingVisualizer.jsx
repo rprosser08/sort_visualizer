@@ -124,9 +124,25 @@ export default class SortingVisualizer extends React.Component{
                 k++
                 const styleBar = arrayBars[k].style;
                 styleBar.height = `${mergeHelper[i][j]}px`;
+                styleBar.backgroundColor = SECONDARY_COLOR;
 
                 await delay(ANIMATION_SPEED);
+
+                styleBar.backgroundColor = PRIMARY_COLOR;
             }
+        }
+
+        for(let i = 0; i < helperArray.length; i++){
+            const barStyle = arrayBars[i].style;
+            barStyle.backgroundColor = TERTIARY_COLOR;
+            await delay(FILL_SPEED);
+        }
+
+        await delay(300);
+
+        for(let i = 0; i < helperArray.length; i++){
+            const barStyle = arrayBars[i].style;
+            barStyle.backgroundColor = PRIMARY_COLOR;
         }
     }
 
