@@ -51,11 +51,6 @@ export default class SortingVisualizer extends React.Component{
         this.setState({array});
     }
 
-    /* Working quckSort algorithm, but how to make it show the animation */
-    /* Do I have it return the two pivots? (Maybe can be done with the   */
-    /* Helper function?)                                                 */
-    /* Could have it return an array of every comparison it made and     */
-    /* then use that to know which animaiton to do with the colors etc.  */
     async quickSort(){
         const sortedArray = quick_sort(this.state.array.slice());
         const pivotComps = sortedArray[0];
@@ -70,6 +65,14 @@ export default class SortingVisualizer extends React.Component{
             styleBar1.backgroundColor = SECONDARY_COLOR;
             styleBar2.height = `${this.state.array[swapComps[i][0]]}px`;
             styleBar2.backgroundColor = SECONDARY_COLOR;
+
+            let start = swapComps[i][1] + 1;
+            let end = swapComps[i][0];
+
+            for(start; start < end; start++){
+                const barsStyle = arrayBars[start].style;
+                barsStyle.backgroundColor = SECONDARY_COLOR;
+            }
 
             [this.state.array[swapComps[i][0]], this.state.array[swapComps[i][1]]] = [this.state.array[swapComps[i][1]], this.state.array[swapComps[i][0]]];
 
@@ -91,8 +94,6 @@ export default class SortingVisualizer extends React.Component{
             const barStyle = arrayBars[i].style;
             barStyle.backgroundColor = PRIMARY_COLOR;
         }
-
-        // STILL NEED TO ADD COLOR TO PIVOT VALUE FUNCTIONALITY
     }
 
     mergeSort(){
@@ -123,15 +124,6 @@ export default class SortingVisualizer extends React.Component{
             const jsSortedArray = array.slice().sort((a,b) => a - b);
             const quickSortedArray = quick_sort(array.slice());
             console.log(sortedTest(jsSortedArray, quickSortedArray));
-        }
-    }
-
-    testSetTimeout(){
-        let a1 = Array(1,2,3,4,5)
-        for(let i = 0; i < a1.length; i++){
-            setTimeout(function(){
-                console.log(a1[i]);
-            }, ANIMATION_SPEED * 10);
         }
     }
 
