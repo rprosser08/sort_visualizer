@@ -68,7 +68,7 @@ export default class SortingVisualizer extends React.Component{
             let start = swapComps[i][1] + 1;
             let end = swapComps[i][0];
 
-            for(start; start < end; start++){
+            for(start; start <= end; start++){
                 const barsStyle = arrayBars[start].style;
                 barsStyle.backgroundColor = SECONDARY_COLOR;
             }
