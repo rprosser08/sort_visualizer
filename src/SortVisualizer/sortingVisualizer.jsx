@@ -39,6 +39,7 @@ export default class SortingVisualizer extends React.Component{
     }
 
     resetArray(){
+        mergeHelper.length = 0;
         const array = [];
         for(let i = 0; i < NUMBER_OF_BARS; i++){
             array.push(getRandomInt(MIN_VALUE, MAX_VALUE));
@@ -104,7 +105,6 @@ export default class SortingVisualizer extends React.Component{
         let k = -1;
         merge_sort(this.state.array.slice());
         const arrayBars = document.getElementsByClassName('array-bar');
-        //console.log(mergeHelper);
         for(let i = 0; i < mergeHelper.length; i++){
             for(let j = 0; j < mergeHelper[i].length; j++){
                 if(mergeHelper[i].length <= 2){
@@ -122,8 +122,6 @@ export default class SortingVisualizer extends React.Component{
                     twoCounter++;
                 }
                 k++
-                console.log(k);
-                console.log(kReset + " reset");
                 const styleBar = arrayBars[k].style;
                 styleBar.height = `${mergeHelper[i][j]}px`;
 

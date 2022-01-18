@@ -47,12 +47,6 @@ export function quick_sort(array){
 function mergeArrays(left, right){
     let retVal = [];
 
-    /*
-    if(left.length + right.length > 2){
-        //console.log([...left.slice(), ...right.slice()]);
-    }
-    */
-
     while(left.length && right.length){
         if(left[0] < right[0]){
             retVal.push(left.shift());
@@ -83,8 +77,6 @@ export function merge_sort(array){
     }
 
     const left = array.splice(0, half);
-
-    console.log([left.slice(), array.slice()]);
 
     return mergeArrays(merge_sort(left), merge_sort(array));
 }
