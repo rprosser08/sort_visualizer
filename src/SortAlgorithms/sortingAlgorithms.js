@@ -41,3 +41,34 @@ export function quick_sort(array){
     }
     return [pivotComps, swapValues];
 }
+
+function mergeArrays(left, right){
+    let retVal = [];
+
+    while(left.length && right.length){
+        if(left[0] < right[0]){
+            retVal.push(left.shift());
+        }
+        else{
+            retVal.push(right.shift());
+        }
+    }
+    while(left.length){
+        retVal.push(left.shift());
+    }
+    while(right.length){
+        retVal.push(right.shift());
+    }
+    return retVal;
+}
+
+export function merge_sort(array){
+    const half = array.length / 2;
+
+    if(array.length < 2){
+        return array;
+    }
+
+    const left = array.splice(0, half);
+    return mergeArrays(merge_sort(left), merge_sort(array));
+}

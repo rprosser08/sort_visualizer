@@ -1,6 +1,6 @@
 import React from 'react';
 import './sortingVisualizer.css';
-import {quick_sort} from '../SortAlgorithms/sortingAlgorithms';
+import {quick_sort, merge_sort} from '../SortAlgorithms/sortingAlgorithms';
 
 // Speed of animation in MS
 const ANIMATION_SPEED = 10;
@@ -96,7 +96,7 @@ export default class SortingVisualizer extends React.Component{
     }
 
     mergeSort(){
-        // Need to do
+        merge_sort(this.state.array);
     }
 
     heapSort(){
@@ -121,8 +121,9 @@ export default class SortingVisualizer extends React.Component{
                 array.push(getRandomInt(-1000,1000));
             }
             const jsSortedArray = array.slice().sort((a,b) => a - b);
-            const quickSortedArray = quick_sort(array.slice());
-            console.log(sortedTest(jsSortedArray, quickSortedArray));
+            // Change to which sorting algo you're testing
+            const mergeSortedArray = merge_sort(array.slice());
+            console.log(sortedTest(jsSortedArray, mergeSortedArray));
         }
     }
 
@@ -144,6 +145,7 @@ export default class SortingVisualizer extends React.Component{
                 <button onClick={() => this.quickSort()}>Quick Sort</button>
                 <button onClick={() => this.mergeSort()}>Merge Sort</button>
                 <button onClick={() => this.heapSort()}>Heap Sort</button>
+                <button onClick={() => this.testSortingAlgos()}>Test Algos</button>
             </div>
         );
     }
