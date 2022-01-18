@@ -1,6 +1,6 @@
 import React from 'react';
 import './sortingVisualizer.css';
-import {quick_sort, merge_sort} from '../SortAlgorithms/sortingAlgorithms';
+import {quick_sort, merge_sort, mergeHelper} from '../SortAlgorithms/sortingAlgorithms';
 
 // Speed of animation in MS
 const ANIMATION_SPEED = 10;
@@ -96,7 +96,15 @@ export default class SortingVisualizer extends React.Component{
     }
 
     mergeSort(){
+        const halfLen = Math.floor(this.state.array.length / 2);
         merge_sort(this.state.array);
+        //console.log(mergeHelper);
+        for(let i = 0; i < mergeHelper.length; i++){
+            console.log(mergeHelper[i]);
+            if(mergeHelper[i].length === halfLen){
+                console.log("pass");
+            }
+        }
     }
 
     heapSort(){
@@ -141,7 +149,7 @@ export default class SortingVisualizer extends React.Component{
                         }}></div>
                 ))}
                 <br></br>
-                <button onClick={() => this.resetArray()}>Create New Array</button>
+                <button onClick={() => this.testArray()}>Create New Array</button>
                 <button onClick={() => this.quickSort()}>Quick Sort</button>
                 <button onClick={() => this.mergeSort()}>Merge Sort</button>
                 <button onClick={() => this.heapSort()}>Heap Sort</button>

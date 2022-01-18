@@ -1,3 +1,5 @@
+export const mergeHelper = [];
+
 function partition(array, start, end, pivotComps, swapValues){
     const pivotValue = array[end];
     let pivotIdx = start;
@@ -45,6 +47,10 @@ export function quick_sort(array){
 function mergeArrays(left, right){
     let retVal = [];
 
+    if(left.length + right.length > 2){
+        //console.log([...left.slice(), ...right.slice()]);
+    }
+
     while(left.length && right.length){
         if(left[0] < right[0]){
             retVal.push(left.shift());
@@ -59,6 +65,12 @@ function mergeArrays(left, right){
     while(right.length){
         retVal.push(right.shift());
     }
+
+    if(retVal.length > 2){
+        mergeHelper.push(retVal.slice());
+
+    }
+
     return retVal;
 }
 
@@ -70,5 +82,6 @@ export function merge_sort(array){
     }
 
     const left = array.splice(0, half);
+
     return mergeArrays(merge_sort(left), merge_sort(array));
 }
