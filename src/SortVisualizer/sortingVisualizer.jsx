@@ -53,7 +53,6 @@ export default class SortingVisualizer extends React.Component{
 
     async quickSort(){
         const sortedArray = quick_sort(this.state.array.slice());
-        const pivotComps = sortedArray[0];
         const swapComps = sortedArray[1];
         const arrayBars = document.getElementsByClassName('array-bar');
 
