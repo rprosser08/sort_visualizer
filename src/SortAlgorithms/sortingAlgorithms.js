@@ -39,6 +39,5 @@ export function quick_sort(array){
             stack.push(end);
         }
     }
-    console.log(swapValues);
     return [pivotComps, swapValues];
 }
