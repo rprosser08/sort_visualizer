@@ -29,7 +29,7 @@ export default class SortingVisualizer extends React.Component{
 
     testArray(){
         const array = [];
-        array.push(30,20,40,10,50,70,60,200,30,50,60,70,90);
+        array.push(200,30,20,40,10,50,70,60,30,50,60,70,90);
         this.setState({array});
         for(let i = 0; i < this.state.array.length; i++){
             const arrayBars = document.getElementsByClassName('array-bar');
@@ -95,14 +95,39 @@ export default class SortingVisualizer extends React.Component{
         }
     }
 
-    mergeSort(){
+    async mergeSort(){
         const halfLen = Math.floor(this.state.array.length / 2);
-        merge_sort(this.state.array);
+        const helperArray = this.state.array.slice();
+        let kReset = -1;
+        let oneCounter = 0;
+        let twoCounter = 0;
+        let k = -1;
+        merge_sort(this.state.array.slice());
+        const arrayBars = document.getElementsByClassName('array-bar');
         //console.log(mergeHelper);
         for(let i = 0; i < mergeHelper.length; i++){
-            console.log(mergeHelper[i]);
-            if(mergeHelper[i].length === halfLen){
-                console.log("pass");
+            for(let j = 0; j < mergeHelper[i].length; j++){
+                if(mergeHelper[i].length <= 2){
+                    k = kReset;
+                    oneCounter = 0;
+                    continue;
+                }
+                if(mergeHelper[i].length >= halfLen && oneCounter === 0){
+                    kReset = halfLen - 1;
+                    k = kReset;
+                    oneCounter++;
+                }
+                if(mergeHelper[i].length === helperArray.length && twoCounter === 0){
+                    k = -1;
+                    twoCounter++;
+                }
+                k++
+                console.log(k);
+                console.log(kReset + " reset");
+                const styleBar = arrayBars[k].style;
+                styleBar.height = `${mergeHelper[i][j]}px`;
+
+                await delay(ANIMATION_SPEED);
             }
         }
     }
@@ -149,11 +174,10 @@ export default class SortingVisualizer extends React.Component{
                         }}></div>
                 ))}
                 <br></br>
-                <button onClick={() => this.testArray()}>Create New Array</button>
+                <button onClick={() => this.resetArray()}>Create New Array</button>
                 <button onClick={() => this.quickSort()}>Quick Sort</button>
                 <button onClick={() => this.mergeSort()}>Merge Sort</button>
                 <button onClick={() => this.heapSort()}>Heap Sort</button>
-                <button onClick={() => this.testSortingAlgos()}>Test Algos</button>
             </div>
         );
     }
