@@ -118,7 +118,7 @@ export default class SortingVisualizer extends React.Component{
                     oneCounter = 0;
                     continue;
                 }
-                if(mergeHelper[i].length == halfLen && oneCounter === 0 && half === 0){
+                if(mergeHelper[i].length === halfLen && oneCounter === 0 && half === 0){
                     kReset = -1;
                     k = kReset;
                     oneCounter++;
