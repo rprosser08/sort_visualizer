@@ -103,16 +103,32 @@ export default class SortingVisualizer extends React.Component{
         let oneCounter = 0;
         let twoCounter = 0;
         let k = -1;
+        let half = 0;
         merge_sort(this.state.array.slice());
         const arrayBars = document.getElementsByClassName('array-bar');
+        //console.log(mergeHelper);
         for(let i = 0; i < mergeHelper.length; i++){
+            //console.log(mergeHelper[i]);
+            if(half === 1){
+                kReset = halfLen - 1;
+                k = kReset;
+                half++;
+            }
             for(let j = 0; j < mergeHelper[i].length; j++){
                 if(mergeHelper[i].length <= 2){
                     k = kReset;
                     oneCounter = 0;
                     continue;
                 }
-                if(mergeHelper[i].length >= halfLen && oneCounter === 0){
+                if(mergeHelper[i].length == halfLen && oneCounter === 0 && half === 0){
+                    kReset = -1;
+                    k = kReset;
+                    oneCounter++;
+                    half++;
+                }
+                if(mergeHelper[i].length >= halfLen && oneCounter === 0 && half > 0){
+                    console.log(mergeHelper[i]);
+                    console.log(halfLen)
                     kReset = halfLen - 1;
                     k = kReset;
                     oneCounter++;
