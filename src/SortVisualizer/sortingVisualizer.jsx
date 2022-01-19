@@ -106,9 +106,7 @@ export default class SortingVisualizer extends React.Component{
         let half = 0;
         merge_sort(this.state.array.slice());
         const arrayBars = document.getElementsByClassName('array-bar');
-        //console.log(mergeHelper);
         for(let i = 0; i < mergeHelper.length; i++){
-            //console.log(mergeHelper[i]);
             if(half === 1){
                 kReset = halfLen - 1;
                 k = kReset;
