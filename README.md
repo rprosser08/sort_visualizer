@@ -13,6 +13,6 @@ You will need npm intalled, which can be done with running "npm install" in your
 Once it is up and running, you can generate a new array to sort with the "Create New Array" button or see a sorting algorithm by clicking one of the sorting algorthms. 
 
 ## Resources
-The quick sort algorithm was taken and altered from here: https://stackabuse.com/quicksort-in-javascript/
-The merge sort algorithm was taken and altered from here: https://stackabuse.com/merge-sort-in-javascript/
-The heap sort algorithm was taken and altered from here: https://www.geeksforgeeks.org/heap-sort/
+The quick sort algorithm was taken and altered from here: https://stackabuse.com/quicksort-in-javascript/  
+The merge sort algorithm was taken and altered from here: https://stackabuse.com/merge-sort-in-javascript/  
+The heap sort algorithm was taken and altered from here: https://www.geeksforgeeks.org/heap-sort/  
