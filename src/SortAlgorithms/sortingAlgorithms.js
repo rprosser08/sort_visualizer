@@ -82,3 +82,43 @@ export function merge_sort(array){
 
     return mergeArrays(merge_sort(left), merge_sort(array));
 }
+
+function minHeapify(array, size, i){
+    let largest = i;
+    let leftChild = 2 * i + 1;
+    let rightChild = 2 * i + 2;
+
+    if(leftChild < size && array[leftChild] > array[largest]){
+        largest = leftChild;
+    }
+
+    if(rightChild < size && array[rightChild] > array[largest]){
+        largest = rightChild;
+    }
+
+    if(largest !== i){
+        let temp = array[i];
+        array[i] = array[largest];
+        array[largest] = temp;
+
+        minHeapify(array, size, largest);
+    }
+}
+
+export function heap_sort(array){
+    let size = array.length;
+    let halfLen = Math.floor(size / 2 - 1);
+    let forSize = size - 1;
+
+    for(let i = halfLen; i >=0; i--){
+        minHeapify(array, size, i);
+    }
+
+    for(let i = forSize; i >= 0; i--){
+        let temp = array[0];
+        array[0] = array[i];
+        array[i] = temp;
+
+        minHeapify(array, i, 0);
+    }
+}
