@@ -1,6 +1,6 @@
 import React from 'react';
 import './sortingVisualizer.css';
-import {quick_sort, merge_sort, mergeHelper, heap_sort, heapHelper, heapList, midList} from '../SortAlgorithms/sortingAlgorithms';
+import {quick_sort, merge_sort, mergeHelper, heap_sort, heapList} from '../SortAlgorithms/sortingAlgorithms';
 
 // Speed of animation in MS
 const ANIMATION_SPEED = 10;
@@ -25,8 +25,8 @@ export default class SortingVisualizer extends React.Component{
     }
 
     componentDidMount(){
-        //this.resetArray();
-        this.testArray();
+        this.resetArray();
+        //this.testArray();
     }
 
     // Smaller array to test the sorting algorithms on
@@ -43,6 +43,7 @@ export default class SortingVisualizer extends React.Component{
 
     resetArray(){
         mergeHelper.length = 0;
+        heapList.length = 0;
         const array = [];
         for(let i = 0; i < NUMBER_OF_BARS; i++){
             array.push(getRandomInt(MIN_VALUE, MAX_VALUE));
@@ -87,20 +88,7 @@ export default class SortingVisualizer extends React.Component{
             styleBar2.backgroundColor = PRIMARY_COLOR;
         }
 
-        // Change the to the TERTIARY_COLOR after the sort is complete
-        for(let i = 0; i < this.state.array.length; i++){
-            const styleBar = arrayBars[i].style;
-            styleBar.backgroundColor = TERTIARY_COLOR;
-            await delay(FILL_SPEED);
-        }
-
-        await delay(300);
-
-        // Changes the array back to the PRIMARY_COLOR
-        for(let i = 0; i < this.state.array.length; i++){
-            const barStyle = arrayBars[i].style;
-            barStyle.backgroundColor = PRIMARY_COLOR;
-        }
+        this.finishedSorting();
     }
 
     async mergeSort(){
@@ -169,30 +157,30 @@ export default class SortingVisualizer extends React.Component{
             }
         }
 
-        // Change the to the TERTIARY_COLOR after the sort is complete
-        for(let i = 0; i < helperArray.length; i++){
-            const barStyle = arrayBars[i].style;
-            barStyle.backgroundColor = TERTIARY_COLOR;
-            await delay(FILL_SPEED);
-        }
-
-        await delay(300);
-
-        // Change the to the PRIMARY_COLOR after the sort is complete
-        for(let i = 0; i < helperArray.length; i++){
-            const barStyle = arrayBars[i].style;
-            barStyle.backgroundColor = PRIMARY_COLOR;
-        }
+        this.finishedSorting();
     }
 
-    heapSort(){
+    async heapSort(){
         let sortedArray = this.state.array.slice();
         heap_sort(sortedArray);
-        console.log(this.state.array);
-        console.log(heapHelper);
-        console.log(midList);
-        console.log(heapList);
-        console.log(sortedArray);
+        const arrayBars = document.getElementsByClassName('array-bar');
+
+        for(let i = 0; i < heapList.length; i++){
+            const bar1Style = arrayBars[heapList[i][0][1]].style;
+            const bar2Style = arrayBars[heapList[i][1][1]].style;
+
+            const color = i % 2 === 0 ? SECONDARY_COLOR : PRIMARY_COLOR;
+
+            bar1Style.backgroundColor = color;
+            bar2Style.backgroundColor = color;
+
+            bar1Style.height = `${heapList[i][0][0]}px`;
+            bar2Style.height = `${heapList[i][1][0]}px`;
+
+            await delay(ANIMATION_SPEED);
+        }
+
+        this.finishedSorting();
     }
 
     bubbleSort(){
@@ -208,6 +196,24 @@ export default class SortingVisualizer extends React.Component{
         for(let i = 0; i < a1.length; i++){
             console.log(a1[i]);
             await delay(1000);
+        }
+    }
+
+    async finishedSorting(){
+        const size = this.state.array.length
+        const arrayBars = document.getElementsByClassName('array-bar');
+
+        for(let i = 0; i < size; i++){
+            const style = arrayBars[i].style;
+            style.backgroundColor = TERTIARY_COLOR;
+            await delay(FILL_SPEED);
+        }
+
+        await delay(300);
+
+        for(let i = 0; i < size; i++){
+            const style = arrayBars[i].style;
+            style.backgroundColor = PRIMARY_COLOR;
         }
     }
 
@@ -246,11 +252,10 @@ export default class SortingVisualizer extends React.Component{
                         }}></div>
                 ))}
                 <br></br>
-                <button onClick={() => this.testArray()}>Create New Array</button>
+                <button onClick={() => this.resetArray()}>Create New Array</button>
                 <button onClick={() => this.quickSort()}>Quick Sort</button>
                 <button onClick={() => this.mergeSort()}>Merge Sort</button>
                 <button onClick={() => this.heapSort()}>Heap Sort</button>
-                <button onClick={() => this.testSortingAlgos()}>Test Algos</button>
             </div>
         );
     }
