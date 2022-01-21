@@ -169,6 +169,7 @@ export default class SortingVisualizer extends React.Component{
             const bar1Style = arrayBars[heapList[i][0][1]].style;
             const bar2Style = arrayBars[heapList[i][1][1]].style;
 
+            // Shows which two bars are being compared and will be swapped
             const color = i % 2 === 0 ? SECONDARY_COLOR : PRIMARY_COLOR;
 
             bar1Style.backgroundColor = color;
