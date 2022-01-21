@@ -4,7 +4,7 @@ This project shows how different sorting algorithms look, including quick sort, 
 ## Build Status
 It is currently being developed, with quick sort and merge sort being completed. Heap sort, insertion sort, and bubble sort are still yet to be implemented. Along with cleaning up the UI to make it look better overall. 
 
-### Tech / Framework
+## Tech / Framework
 This project is built mainly with JavaScript and React, with a little bit of HTML, and CSS for styling.
 
 ## How to run
