@@ -1,6 +1,19 @@
+/*
+QUICK SORT ALGORITHM TAKEN AND ALTERED FROM https://stackabuse.com/quicksort-in-javascript/
+MERGE SORT ALGORITHM TAKEN AND ALTERED FROM https://stackabuse.com/merge-sort-in-javascript/
+HEAP SORT ALGORITHM TAKEN AND ALTERED FROM https://www.geeksforgeeks.org/heap-sort/
+*/
+
+
+
 // List of all the split arrays used in the merge sort algorithm
 // Used to make the switches on the screen
 export const mergeHelper = [];
+
+// Used for the switches in the heap sort algorithm
+export const heapList = [];
+export const midList = [];
+export const heapHelper = [];
 
 function partition(array, start, end, pivotComps, swapValues){
     const pivotValue = array[end];
@@ -88,6 +101,10 @@ function heapify(array, size, i){
     let leftChild = 2 * i + 1;
     let rightChild = 2 * i + 2;
 
+    //console.log(array);
+    //console.log([[array[i], i], [array[leftChild], leftChild], [array[rightChild], rightChild]]);
+    heapList.push([[array[i], i], [array[leftChild], leftChild], [array[rightChild], rightChild]]);
+
     if(leftChild < size && array[leftChild] < array[largest]){
         largest = leftChild;
     }
@@ -101,8 +118,25 @@ function heapify(array, size, i){
         array[i] = array[largest];
         array[largest] = temp;
 
+        //console.log(array);
+        //console.log([[array[i], i], [array[leftChild], leftChild], [array[rightChild], rightChild]]);
+
+        //midList.push([array[i], i]);
+        //midList.push([array[leftChild], leftChild]);
+        //midList.push([array[rightChild], rightChild]);
+
+        midList.push([[array[i], i], [array[leftChild], leftChild], [array[rightChild], rightChild]]);
+
         heapify(array, size, largest);
     }
+
+    //console.log(array);
+    //console.log([[array[i], i], [array[leftChild], leftChild], [array[rightChild], rightChild]]);
+    heapHelper.push([[array[i], i], [array[leftChild], leftChild], [array[rightChild], rightChild]]);
+
+    //console.log(topList);
+    //console.log(midList);
+    //console.log(bottomList);
 }
 
 export function heap_sort(array){

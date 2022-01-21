@@ -1,6 +1,6 @@
 import React from 'react';
 import './sortingVisualizer.css';
-import {quick_sort, merge_sort, mergeHelper, heap_sort} from '../SortAlgorithms/sortingAlgorithms';
+import {quick_sort, merge_sort, mergeHelper, heap_sort, heapHelper, heapList, midList} from '../SortAlgorithms/sortingAlgorithms';
 
 // Speed of animation in MS
 const ANIMATION_SPEED = 10;
@@ -188,6 +188,10 @@ export default class SortingVisualizer extends React.Component{
     heapSort(){
         let sortedArray = this.state.array.slice();
         heap_sort(sortedArray);
+        console.log(this.state.array);
+        console.log(heapHelper);
+        console.log(midList);
+        console.log(heapList);
         console.log(sortedArray);
     }
 
