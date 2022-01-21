@@ -1,3 +1,5 @@
+// List of all the split arrays used in the merge sort algorithm
+// Used to make the switches on the screen
 export const mergeHelper = [];
 
 function partition(array, start, end, pivotComps, swapValues){

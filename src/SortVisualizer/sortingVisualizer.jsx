@@ -10,7 +10,9 @@ const NUMBER_OF_BARS = 310;
 const PRIMARY_COLOR = 'blue';
 const SECONDARY_COLOR = 'red';
 const TERTIARY_COLOR = 'green';
+// Minimum value represented by height of the bars
 const MIN_VALUE = 5;
+// Maximum value reprsented by the height of the bars
 const MAX_VALUE = 700;
 
 export default class SortingVisualizer extends React.Component{
@@ -27,6 +29,7 @@ export default class SortingVisualizer extends React.Component{
         //this.testArray();
     }
 
+    // Smaller array to test the sorting algorithms on
     testArray(){
         const array = [];
         array.push(200,30,20,40,10,50,70,60,30,50,60,70,90);
@@ -69,11 +72,13 @@ export default class SortingVisualizer extends React.Component{
             let start = swapComps[i][1] + 1;
             let end = swapComps[i][0];
 
+            // Sets all the bars inbetween the two being swapped to also be the SECONDARY_COLOR
             for(start; start <= end; start++){
                 const barsStyle = arrayBars[start].style;
                 barsStyle.backgroundColor = SECONDARY_COLOR;
             }
 
+            // Swap the values in the actual array
             [this.state.array[swapComps[i][0]], this.state.array[swapComps[i][1]]] = [this.state.array[swapComps[i][1]], this.state.array[swapComps[i][0]]];
 
             await delay(ANIMATION_SPEED);
@@ -82,6 +87,7 @@ export default class SortingVisualizer extends React.Component{
             styleBar2.backgroundColor = PRIMARY_COLOR;
         }
 
+        // Change the to the TERTIARY_COLOR after the sort is complete
         for(let i = 0; i < this.state.array.length; i++){
             const styleBar = arrayBars[i].style;
             styleBar.backgroundColor = TERTIARY_COLOR;
@@ -90,6 +96,7 @@ export default class SortingVisualizer extends React.Component{
 
         await delay(300);
 
+        // Changes the array back to the PRIMARY_COLOR
         for(let i = 0; i < this.state.array.length; i++){
             const barStyle = arrayBars[i].style;
             barStyle.backgroundColor = PRIMARY_COLOR;
@@ -97,7 +104,9 @@ export default class SortingVisualizer extends React.Component{
     }
 
     async mergeSort(){
+        // The middle index of the original array
         const halfLen = Math.floor(this.state.array.length / 2);
+        // Copy of the original array unchanged
         const helperArray = this.state.array.slice();
         let kReset = -1;
         let oneCounter = 0;
@@ -107,23 +116,33 @@ export default class SortingVisualizer extends React.Component{
         merge_sort(this.state.array.slice());
         const arrayBars = document.getElementsByClassName('array-bar');
         for(let i = 0; i < mergeHelper.length; i++){
+
+            // To tell which half is currenlty be sorted
             if(half === 1){
                 kReset = halfLen - 1;
                 k = kReset;
                 half++;
             }
+
+            // Setting value of which bars to change in the array back to either 0 or the middle index
             for(let j = 0; j < mergeHelper[i].length; j++){
                 if(mergeHelper[i].length <= 2){
                     k = kReset;
                     oneCounter = 0;
                     continue;
                 }
+
+                /* Sets the value where the bars get changed back to 0           */
+                /* (used know when the whole first half is being sorted at once) */
                 if(mergeHelper[i].length === halfLen && oneCounter === 0 && half === 0){
                     kReset = -1;
                     k = kReset;
                     oneCounter++;
                     half++;
                 }
+
+                /* Sets the value where the bars get changed to the middle index */
+                /* (used to know when the whole second half is being sorted)     */
                 if(mergeHelper[i].length >= halfLen && oneCounter === 0 && half > 0){
                     console.log(mergeHelper[i]);
                     console.log(halfLen)
@@ -131,10 +150,14 @@ export default class SortingVisualizer extends React.Component{
                     k = kReset;
                     oneCounter++;
                 }
+
+                /* Sets the value where the bars get changed back to 0 */
+                /* (used to know when the whole array is being sorted) */
                 if(mergeHelper[i].length === helperArray.length && twoCounter === 0){
                     k = -1;
                     twoCounter++;
                 }
+
                 k++
                 const styleBar = arrayBars[k].style;
                 styleBar.height = `${mergeHelper[i][j]}px`;
@@ -146,6 +169,7 @@ export default class SortingVisualizer extends React.Component{
             }
         }
 
+        // Change the to the TERTIARY_COLOR after the sort is complete
         for(let i = 0; i < helperArray.length; i++){
             const barStyle = arrayBars[i].style;
             barStyle.backgroundColor = TERTIARY_COLOR;
@@ -154,6 +178,7 @@ export default class SortingVisualizer extends React.Component{
 
         await delay(300);
 
+        // Change the to the PRIMARY_COLOR after the sort is complete
         for(let i = 0; i < helperArray.length; i++){
             const barStyle = arrayBars[i].style;
             barStyle.backgroundColor = PRIMARY_COLOR;
@@ -161,7 +186,15 @@ export default class SortingVisualizer extends React.Component{
     }
 
     heapSort(){
-        //Need to do
+        // Need to implement
+    }
+
+    bubbleSort(){
+        // Need to implement
+    }
+
+    insertionSort(){
+        // Need to implement
     }
 
     async slowDown(){
@@ -172,8 +205,8 @@ export default class SortingVisualizer extends React.Component{
         }
     }
 
-    // Testings Sorting Algorithms 
-    // Need to add back the test button 
+    /* Testings Sorting Algorithms 
+       Need to add back the test button */
     testSortingAlgos(){
         for(let i = 0; i < 100; i++){
             const array = [];
@@ -212,6 +245,7 @@ export default class SortingVisualizer extends React.Component{
 
 }
 
+// To help slow down the sorting algorithms
 const delay = async(ms = 1000) => new Promise(resolve => setTimeout(resolve, ms));
 
 function getRandomInt(min, max){
