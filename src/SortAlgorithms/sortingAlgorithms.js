@@ -88,11 +88,11 @@ function heapify(array, size, i){
     let leftChild = 2 * i + 1;
     let rightChild = 2 * i + 2;
 
-    if(leftChild < size && array[leftChild] > array[largest]){
+    if(leftChild < size && array[leftChild] < array[largest]){
         largest = leftChild;
     }
 
-    if(rightChild < size && array[rightChild] > array[largest]){
+    if(rightChild < size && array[rightChild] < array[largest]){
         largest = rightChild;
     }
 
@@ -110,7 +110,7 @@ export function heap_sort(array){
     let halfLen = Math.floor(size / 2 - 1);
     let forSize = size - 1;
 
-    for(let i = halfLen; i >=0; i--){
+    for(let i = halfLen; i >= 0; i--){
         heapify(array, size, i);
     }
 

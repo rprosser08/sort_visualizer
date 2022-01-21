@@ -25,8 +25,8 @@ export default class SortingVisualizer extends React.Component{
     }
 
     componentDidMount(){
-        this.resetArray();
-        //this.testArray();
+        //this.resetArray();
+        this.testArray();
     }
 
     // Smaller array to test the sorting algorithms on
@@ -186,7 +186,9 @@ export default class SortingVisualizer extends React.Component{
     }
 
     heapSort(){
-        heap_sort(this.array);
+        let sortedArray = this.state.array.slice();
+        heap_sort(sortedArray);
+        console.log(sortedArray);
     }
 
     bubbleSort(){
@@ -222,7 +224,7 @@ export default class SortingVisualizer extends React.Component{
             heap_sort(testArray);
             //console.log(testArray);
             //console.log(jsSortedArray);
-            console.log(sortedTest(jsSortedArray, testArray));
+            console.log(sortedTest(jsSortedArray.reverse(), testArray));
         }
     }
 
@@ -240,7 +242,7 @@ export default class SortingVisualizer extends React.Component{
                         }}></div>
                 ))}
                 <br></br>
-                <button onClick={() => this.resetArray()}>Create New Array</button>
+                <button onClick={() => this.testArray()}>Create New Array</button>
                 <button onClick={() => this.quickSort()}>Quick Sort</button>
                 <button onClick={() => this.mergeSort()}>Merge Sort</button>
                 <button onClick={() => this.heapSort()}>Heap Sort</button>
