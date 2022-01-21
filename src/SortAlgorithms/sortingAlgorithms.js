@@ -83,7 +83,7 @@ export function merge_sort(array){
     return mergeArrays(merge_sort(left), merge_sort(array));
 }
 
-function minHeapify(array, size, i){
+function heapify(array, size, i){
     let largest = i;
     let leftChild = 2 * i + 1;
     let rightChild = 2 * i + 2;
@@ -101,7 +101,7 @@ function minHeapify(array, size, i){
         array[i] = array[largest];
         array[largest] = temp;
 
-        minHeapify(array, size, largest);
+        heapify(array, size, largest);
     }
 }
 
@@ -111,7 +111,7 @@ export function heap_sort(array){
     let forSize = size - 1;
 
     for(let i = halfLen; i >=0; i--){
-        minHeapify(array, size, i);
+        heapify(array, size, i);
     }
 
     for(let i = forSize; i >= 0; i--){
@@ -119,6 +119,6 @@ export function heap_sort(array){
         array[0] = array[i];
         array[i] = temp;
 
-        minHeapify(array, i, 0);
+        heapify(array, i, 0);
     }
 }
