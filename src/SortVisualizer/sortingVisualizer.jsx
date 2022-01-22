@@ -1,6 +1,6 @@
 import React from 'react';
 import './sortingVisualizer.css';
-import {quick_sort, merge_sort, mergeHelper, heap_sort, heapList, bubble_sort} from '../SortAlgorithms/sortingAlgorithms';
+import {quick_sort, merge_sort, mergeHelper, heap_sort, heapList, bubble_sort, bubbleHelper} from '../SortAlgorithms/sortingAlgorithms';
 
 // Speed of animation in MS
 const ANIMATION_SPEED = 10;
@@ -44,6 +44,7 @@ export default class SortingVisualizer extends React.Component{
     resetArray(){
         mergeHelper.length = 0;
         heapList.length = 0;
+        bubbleHelper.length = 0;
         const array = [];
         for(let i = 0; i < NUMBER_OF_BARS; i++){
             array.push(getRandomInt(MIN_VALUE, MAX_VALUE));
@@ -184,8 +185,27 @@ export default class SortingVisualizer extends React.Component{
         this.finishedSorting();
     }
 
-    bubbleSort(){
-        // Need to implement
+    async bubbleSort(){
+        let sortedArray = this.state.array.slice();
+        bubble_sort(sortedArray);
+        const arrayBars = document.getElementsByClassName('array-bar');
+
+        for(let i = 0; i < bubbleHelper.length; i++){
+            const bar1Style = arrayBars[bubbleHelper[i][0][1]].style;
+            const bar2Style = arrayBars[bubbleHelper[i][1][1]].style;
+
+            const color = i % 2 === 0 ? SECONDARY_COLOR : PRIMARY_COLOR;
+
+            bar1Style.backgroundColor = color;
+            bar2Style.backgroundColor = color;
+
+            bar1Style.height = `${bubbleHelper[i][0][0]}px`;
+            bar2Style.height = `${bubbleHelper[i][1][0]}px`;
+
+            await delay(ANIMATION_SPEED);
+        }
+
+        this.finishedSorting();
     }
 
     insertionSort(){

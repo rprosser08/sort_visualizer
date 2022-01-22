@@ -14,6 +14,8 @@ export const mergeHelper = [];
 // Used for the switches in the heap sort algorithm
 export const heapList = [];
 
+export const bubbleHelper = [];
+
 function partition(array, start, end, pivotComps, swapValues){
     const pivotValue = array[end];
     let pivotIdx = start;
@@ -142,9 +144,11 @@ export function heap_sort(array){
 }
 
 function swap(array, x, y){
+    bubbleHelper.push([[array[x], x], [array[y], y]]);
     let temp = array[x];
     array[x] = array[y];
     array[y] = temp;
+    bubbleHelper.push([[array[x], x], [array[y], y]]);
 }
 
 export function bubble_sort(array){
