@@ -3,6 +3,7 @@ QUICK SORT ALGORITHM WAS TAKEN AND ALTERED FROM https://stackabuse.com/quicksort
 MERGE SORT ALGORITHM WAS TAKEN AND ALTERED FROM https://stackabuse.com/merge-sort-in-javascript/
 HEAP SORT ALGORITHM WAS TAKEN AND ALTERED FROM https://www.geeksforgeeks.org/heap-sort/
 BUBBLE SORT ALGORITHM WAS TAKEN AND ALTERED FROM https://www.geeksforgeeks.org/bubble-sort/
+INSERTION SORT ALGORITHM WAS TAKEN AND ALTERED FROM https://www.geeksforgeeks.org/insertion-sort/
 */
 
 
@@ -15,6 +16,8 @@ export const mergeHelper = [];
 export const heapList = [];
 
 export const bubbleHelper = [];
+
+export const insertionHelper = [];
 
 function partition(array, start, end, pivotComps, swapValues){
     const pivotValue = array[end];
@@ -160,5 +163,25 @@ export function bubble_sort(array){
                 swap(array, j, j+1);
             }
         }
+    }
+}
+
+export function insertion_sort(array){
+    let size = array.length;
+    let key, j;
+
+    for(let i = 1; i < size; i++){
+        key = array[i];
+        j = i - 1;
+
+        while(j >= 0 && array[j] > key){
+            insertionHelper.push([[array[j], j], [array[j+1], j+1], [i]]);
+            let temp = array[j + 1];
+            array[j + 1] = array[j];
+            array[j] = temp;
+            insertionHelper.push([[array[j], j], [array[j+1], j+1], [i]]);
+            j = j - 1;
+        }
+        array[j+1] = key;
     }
 }
