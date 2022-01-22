@@ -1,7 +1,8 @@
 /*
-QUICK SORT ALGORITHM TAKEN AND ALTERED FROM https://stackabuse.com/quicksort-in-javascript/
-MERGE SORT ALGORITHM TAKEN AND ALTERED FROM https://stackabuse.com/merge-sort-in-javascript/
-HEAP SORT ALGORITHM TAKEN AND ALTERED FROM https://www.geeksforgeeks.org/heap-sort/
+QUICK SORT ALGORITHM WAS TAKEN AND ALTERED FROM https://stackabuse.com/quicksort-in-javascript/
+MERGE SORT ALGORITHM WAS TAKEN AND ALTERED FROM https://stackabuse.com/merge-sort-in-javascript/
+HEAP SORT ALGORITHM WAS TAKEN AND ALTERED FROM https://www.geeksforgeeks.org/heap-sort/
+BUBBLE SORT ALGORITHM WAS TAKEN AND ALTERED FROM https://www.geeksforgeeks.org/bubble-sort/
 */
 
 
@@ -137,5 +138,23 @@ export function heap_sort(array){
         heapList.push([[array[0], 0], [array[i], i]]);
 
         heapify(array, i, 0);
+    }
+}
+
+function swap(array, x, y){
+    let temp = array[x];
+    array[x] = array[y];
+    array[y] = temp;
+}
+
+export function bubble_sort(array){
+    let forSize = array.length - 1;
+
+    for(let i = 0; i < forSize; i++){
+        for(let j = 0; j < forSize - i; j++){
+            if(array[j] > array[j+1]){
+                swap(array, j, j+1);
+            }
+        }
     }
 }
